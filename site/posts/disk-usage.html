@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پیدا کردن فایل‌هایی که دیسک را پر کرده‌اند · دفترچه یادداشت فنی</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/">دفترچه یادداشت فنی</a>
+  <nav><a href="/">خانه</a><a href="/about.html">درباره</a></nav>
+</header>
+<main>
+  <h1>پیدا کردن فایل‌هایی که دیسک را پر کرده‌اند</h1>
+  <p class="meta">۲ شهریور ۱۴۰۵</p>
+  <p>اول ببینید کدام پوشه بزرگ‌تر است و همان را دنبال کنید:</p>
+  <pre dir="ltr">du -xh --max-depth=1 / 2&gt;/dev/null | sort -h | tail</pre>
+  <p>بعد بزرگ‌ترین فایل‌ها را پیدا کنید:</p>
+  <pre dir="ltr">find /var -xdev -type f -size +200M -printf '%s %p\n' | sort -n | tail</pre>
+  <p>اگر <code>df</code> دیسک را پر نشان می‌دهد ولی <code>du</code> چیزی پیدا نمی‌کند، معمولاً فایلی پاک شده که هنوز یک برنامه آن را باز نگه داشته است. <code>lsof +L1</code> آن را نشان می‌دهد.</p>
+</main>
+<footer class="foot">نوشته‌ها آزادند؛ با ذکر منبع استفاده کنید.</footer>
+</body>
+</html>

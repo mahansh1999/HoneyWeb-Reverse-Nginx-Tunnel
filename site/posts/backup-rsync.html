@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پشتیبان‌گیری افزایشی با rsync · دفترچه یادداشت فنی</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/">دفترچه یادداشت فنی</a>
+  <nav><a href="/">خانه</a><a href="/about.html">درباره</a></nav>
+</header>
+<main>
+  <h1>پشتیبان‌گیری افزایشی با rsync</h1>
+  <p class="meta">۱۴ مهر ۱۴۰۵</p>
+  <p>گزینه <code>--link-dest</code> در rsync فایل‌هایی را که از دیروز تغییر نکرده‌اند به‌جای کپی، به نسخه قبلی لینک می‌کند. نتیجه این است که هر پوشه روزانه یک نسخه کامل به نظر می‌رسد، ولی فقط فایل‌های تغییرکرده فضا می‌گیرند.</p>
+  <pre dir="ltr">today=$(date +%F)
+rsync -a --delete --link-dest=/backup/latest /srv/data/ /backup/$today/
+ln -sfn /backup/$today /backup/latest</pre>
+  <p>این سه خط را در یک فایل بگذارید و با cron هر شب اجرا کنید. برای پاک کردن نسخه‌های قدیمی هم کافی است پوشه‌های قدیمی‌تر از چند هفته را حذف کنید؛ لینک‌ها خودشان مدیریت می‌شوند.</p>
+</main>
+<footer class="foot">نوشته‌ها آزادند؛ با ذکر منبع استفاده کنید.</footer>
+</body>
+</html>

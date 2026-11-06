@@ -1,0 +1,8 @@
+# HoneyWeb Reverse Nginx Tunnel {{NAME}}: who may reach the tunnel. Secret: mode 0600, root only.
+# 1 only for a WebSocket upgrade carrying this tunnel's token. A regex rather than a hashed key: the key would
+# be longer than the default map_hash_bucket_size, and raising that is an http-level setting this file must not
+# own. The engine compares the token again, in constant time, before it accepts anything.
+map "$http_upgrade:$http_authorization" $rnt_{{NAME}}_ok {
+    default 0;
+    "~^websocket:Bearer {{TOKEN}}$" 1;
+}

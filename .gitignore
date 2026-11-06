@@ -1,0 +1,9 @@
+# never commit a tunnel secret, a key or an engine binary
+token
+*.pem
+*.key
+*.crt
+hwtunnel
+hwtunnel.sha256
+bridge/
+__pycache__/
